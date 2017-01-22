@@ -1,0 +1,66 @@
+---
+title: "Two sample test of proportion"
+output:
+  pdf_document: default
+  html_document: default
+---
+<!-- Large sample test, using normal approximation. -->
+
+Suppose there are two samples with proportion $p_1$ and $p_2$ out of samples $n_1$ and $n_2$. Here $p_1 =\frac{f_1}{n_1}$ and $p_2=\frac{f_2}{n_2}$.
+
+We know that $E(\hat p_1 -\hat p_2)=p_1-p_2$ and $var(\hat p_1- \hat p_2)=var(\hat p_1)+var( \hat p_2)=\frac{p_1(1-p_1)}{n_1}+\frac{p_2(1-p_2)}{n_2}$
+
+If sample size is large then 
+
+$$\frac{(\hat p_1-\hat p_2)-(p_1-p_2)}{\sqrt{\frac{p_1(1-p_1)}{n_1}+\frac{p_2(1-p_2)}{n_2}}}$$
+
+follows approximately normal distribution with parameter zero and one. 
+
+Consider the hypothesis $H_0: p_1=p_2$.
+
+So, $E(\hat p_1 -\hat p_2)=p_1-p_2=0$ and $var(\hat p_1 -\hat p_2)=p(1-p)(\frac{1}{n_1}+\frac{1}{n_2})$
+
+
+$\tau=\frac{\hat p_1 -\hat p_2}{\sqrt{\hat p(1-\hat p)(\frac{1}{n_1}+\frac{1}{n_2})}}$ is used for testing the hypothesis $H_0$
+
+Here, $\hat p = \frac{f_1+f_2}{n_1+n_2}$ 
+
+
+We will use $\tau$ to test the null hypothesis. 
+
+
+<!--  1) A meteorologist is studying changing weather patterns over the last 30 years. The meteorologist feels that the proportion of hurricanes that strike the Unites States increased from the period 1990-1998 (there were 46 Atlantic hurricanes, of which 19 struck the United States) and the period 1999-2006 (there were 70 hurricanes, of which 45 struck the United States.)  -->
+
+<!-- a) State the Hypothesis to show the proportion of hurricanes striking the United States increased from the period 1990-1998 to the period 1999-2006.  -->
+
+<!-- b) Choose a level of alpha Use alpha= 0.01 for this problem.  -->
+
+<!-- c) Collect data and calculate necessary statistics to test the hypothesis.  -->
+
+<!-- d) Sketch the sampling distribution. Include the critical value and test statistic  -->
+
+<!-- e) Draw a conclusion for the hypothesis test. Make sure you state your conclusion in the context of the problem.  -->
+
+<!-- f) What is the p-value for the hypothesis test?  -->
+
+Here in this problem,
+
+$n_1=46$,$n_2=70$,$f_1=19$,$f_2=45$, $p_1=0.4130435$, $p_2=0.6428571$, $\hat p=0.5517241$, $\tau=-2.434675$, $Z_{.05}=-1.64$
+
+a) $$H_0:p_1=p-2 \; against \; H_1:p_1<p_2$$
+
+b) let alpha = 0.05. 
+
+c) test statistic: $\tau=-2.434675$
+
+d) We, reject the null hypothesis.
+
+e) p-value =0.007452585
+
+```{r}
+#Rcode
+n1=46;n2=70;f1=19;f2=45;p1=0.4130435; p2=0.6428571;
+p_hat<-(f1+f2)/(n1+n2)
+tau<-(p1-p2)/sqrt((p_hat*(1-p_hat))*((1/n1)+(1/n2)))
+pvalue<-pnorm(tau)
+```
